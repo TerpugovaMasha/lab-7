@@ -1,42 +1,36 @@
+import com.sun.prism.image.Coords;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import javax.swing.*;
 
-class SwingDemo {
+public class Swing {
 
-    JLabel jlab;
+    public Swing() {
+        JFrame fram= new JFrame("Lab7");
 
-    SwingDemo() {
-        JFrame jfrm = new JFrame("An Event Example");
-        jfrm.setLayout(new FlowLayout());
-        jfrm.setSize(650, 650);
-        jfrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        fram.setLayout(new FlowLayout());
 
-        JButton jbtnAlpha = new JButton("Alpha");
-        jbtnAlpha.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent ae) {
-                int a = 70;
-                int b = 500;
-                int x = a + (int) (Math.random() * b);
-                int y = a + (int) (Math.random() * b);
-                jbtnAlpha.setBounds(x, y, jbtnAlpha.getWidth() ,jbtnAlpha.getHeight());
-                jlab.setText("Alpha was pressed");
+        fram.setSize(800,800);
+
+        fram.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        JButton jButton = new JButton("Нажми меня");
+        jButton.addMouseMotionListener(new MouseMotionListener() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                jButton.setBounds((int)(Math.random()*(fram.getWidth()-jButton.getWidth())),
+                        (int)(Math.random()*(fram.getHeight()-jButton.getHeight())),
+                        jButton.getWidth(),
+                        jButton.getHeight());
             }
         });
 
-        jfrm.add(jbtnAlpha);
-        jlab = new JLabel("Press a button");
-
-        jfrm.add(jlab);
-        jfrm.setVisible(true);
-    }
-
-
-    public static void main (String args[]) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new SwingDemo();
-            }
-        });
+        fram.add(jButton);
+        fram.setVisible(true);
     }
 }
